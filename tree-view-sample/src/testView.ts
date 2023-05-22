@@ -77,8 +77,10 @@ function getTreeItem(key: string): vscode.TreeItem {
 	return {
 		label: /**vscode.TreeItemLabel**/<any>{ label: key, highlights: key.length > 1 ? [[key.length - 2, key.length - 1]] : void 0 },
 		tooltip,
-		collapsibleState: treeElement && Object.keys(treeElement).length ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None
-	};
+		collapsibleState: treeElement && Object.keys(treeElement).length ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None,
+		//See: https://github.com/microsoft/vscode/blob/09f80f4c545ee902b4d68e984b3932436ee1e38e/src/vscode-dts/vscode.proposed.treeItemCheckbox.d.ts#L19-L28
+		checkboxState: key.endsWith("a") ? 1 /* Checked */ : 0 /* Unchecked */ 
+	} as any;
 }
 
 function getTreeElement(element): any {
